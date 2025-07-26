@@ -38,7 +38,7 @@ def get_weather_data(state_1:str,state_2:Optional[str] = None,
   weather_for_states:List[dict] = get_weather_api(weather_url, state_values)
   
   return {
-     "state": state_values,
+     "state": weather_for_states,
      "status": 200
   }
 
