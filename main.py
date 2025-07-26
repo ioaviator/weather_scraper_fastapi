@@ -7,6 +7,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
 from config import api_url, g_sheet_url
+from src.get_weather import get_weather_api
 
 app = FastAPI()
 
@@ -33,6 +34,8 @@ def get_weather_data(state_1:str,state_2:Optional[str] = None,
       "message": "No state was given",
       "status": 200
     }
+  ## fetch data from API
+  weather_for_states:List[dict] = get_weather_api(weather_url, state_values)
   
   return {
      "state": state_values,
