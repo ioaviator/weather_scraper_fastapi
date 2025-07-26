@@ -16,18 +16,18 @@
     </nav>
 
     <main>
-        <form method="post" action="/get_weather" class="weather-form">
+        <form method="get" action="/get_weather" class="weather-form">
             <div class="form-group">
                 <label>State 1 (required):</label>
-                <input type="text" name="state1" required placeholder="e.g. Lagos">
+                <input type="text" name="state_1" required placeholder="e.g. Lagos">
             </div>
             <div class="form-group">
                 <label>State 2 (optional):</label>
-                <input type="text" name="state2" placeholder="e.g. Abuja">
+                <input type="text" name="state_2" placeholder="e.g. Abuja">
             </div>
             <div class="form-group">
                 <label>State 3 (optional):</label>
-                <input type="text" name="state3" placeholder="e.g. Kano">
+                <input type="text" name="state_3" placeholder="e.g. Kano">
             </div>
             <button type="submit">Get Weather Forecast</button>
         </form>
