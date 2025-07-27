@@ -4,7 +4,7 @@ import gspread
 
 
 def load_to_sheet(data, url)->Dict :
-  g_sheet_cred = gspread.service_account()
+  g_sheet_cred = gspread.service_account(filename='src/creds/service_account.json')
   spreadsheet = g_sheet_cred.open_by_url(url)
 
   sheetname = spreadsheet.get_worksheet(0)
