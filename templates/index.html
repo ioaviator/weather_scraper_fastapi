@@ -33,15 +33,18 @@
         </form>
 
         {% if weather_data %}
-        <section class="weather-result">
-            {% for state, report in weather_data.items() %}
-                {% if report %}
-                <div class="weather-box">
-                    <p>{{ report }}</p>
-                </div>
-                {% endif %}
-            {% endfor %}
-        </section>
+            <section class="weather-result">
+                {% for state, report in weather_data.items() %}
+                    <div class="weather-box">
+                        <h3>{{ state }}</h3>
+                        <ul>
+                            {% for key, value in report.items() %}
+                            <li><strong>{{ key }}:</strong> {{ value }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endfor %}
+            </section>
         {% endif %}
     </main>
 
