@@ -21,7 +21,7 @@ def load_to_sheet(data, url)->Dict :
     sheetname.append_row([weather['State'], weather['Temperature'],
                          weather['Weather_Condition'], weather['Feels_Like'],
                          weather['Humidity'], weather['Dew_Point'] ])
-  print('sheet loading done')
+  
   return {
     "message": "Success: Data loaded into Google Sheets",
     "status": 200,
