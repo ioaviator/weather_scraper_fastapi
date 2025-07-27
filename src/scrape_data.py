@@ -43,14 +43,9 @@ def scrape_data(response, state:str)-> Dict:
     dew_point = 'N/A'
 
   ## clean data
-  dew_point = re.sub(r"[^\d]", "", dew_point) if dew_point else "N/A"
+  dew_point = re.sub(r"[^\d]", "", dew_point)
   temperature = re.sub(r"[^\d]", "", temperature) if temperature else "N/A"
   feels_like = re.sub(r"[^\d]", "", feels_like) if feels_like else "N/A"
-  
-  # dew_point = re.sub(r"[^\d]", "", dew_point)
-  # temperature = re.sub(r"[^\d]", "", temperature)
-  # feels_like = re.sub(r"[^\d]", "", feels_like)
-
 
   data:dict = {
     "State": state,

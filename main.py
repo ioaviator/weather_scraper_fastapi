@@ -8,6 +8,7 @@ from fastapi.templating import Jinja2Templates
 
 from config import api_url, g_sheet_url
 from src.get_weather import get_weather_api
+from src.load_to_sheet import load_to_sheet
 
 app = FastAPI()
 
@@ -36,6 +37,9 @@ def get_weather_data(request:Request, state_1:str,state_2:Optional[str] = None,
     }
   ## fetch data from API
   weather_for_states:List[dict] = get_weather_api(weather_url, state_values)
+  
+  ## load extracted data to google sheets
+  load_to_g_sheet:dict = load_to_sheet(weather_for_states, g_sheet_url)
 
   weather_data = {
     item["State"].capitalize(): {
