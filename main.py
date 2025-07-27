@@ -19,7 +19,7 @@ async def home(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
 @app.get('/get_weather')
-def get_weather_data(state_1:str,state_2:Optional[str] = None,
+def get_weather_data(request:Request, state_1:str,state_2:Optional[str] = None,
                      state_3:Optional[str] = None):
   
   weather_url:str = api_url
@@ -36,11 +36,25 @@ def get_weather_data(state_1:str,state_2:Optional[str] = None,
     }
   ## fetch data from API
   weather_for_states:List[dict] = get_weather_api(weather_url, state_values)
-  
-  return {
-     "state": weather_for_states,
-     "status": 200
+
+  weather_data = {
+    item["State"].capitalize(): {
+        "Temperature": item["Temperature"],
+        "Weather": item["Weather_Condition"],
+        "Feels Like": item["Feels_Like"],
+        "Humidity": item["Humidity"],
+        "Dew Point": item["Dew_Point"]
+    } for item in weather_for_states
   }
+  
+  return templates.TemplateResponse("index.html", {"request": request, 
+                                                   "weather_data": weather_data})
+
+  # return {
+  #    "state": weather_for_states,
+  #    "status": 200
+  # }
+
 
 
 # if __name__ == "__main__":

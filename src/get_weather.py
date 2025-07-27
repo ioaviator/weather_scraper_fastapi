@@ -20,11 +20,13 @@ def get_weather_api(url:str, states:List)->List[dict]:
       if response.status_code != 200:
         print(f'Invalid state value -- {state}')
         continue
+
+      data = scrape_data(response, state)
+
     except Exception as e:
       print(f"Error fetching {state}: {e}")
       raise e
 
-    data = scrape_data(response, state)
 
     weather_data.append(data)
   

@@ -30,16 +30,27 @@ def scrape_data(response, state:str)-> Dict:
   
   table = soup.find('table', class_='table table--left table--inner-borders-rows')
 
-  humidity_th = table.find('th', string=lambda text: text and 'Humidity:' in text)
-  humidity = humidity_th.find_parent('tr').find('td').get_text(strip=True)
+  try:
+    humidity_th = table.find('th', string=lambda text: text and 'Humidity:' in text)
+    humidity = humidity_th.find_parent('tr').find('td').get_text(strip=True)
+  except AttributeError:
+    humidity = 'N/A'
 
-  dew_point_th = table.find('th', string=lambda text: text and 'Dew Point:' in text)
-  dew_point = dew_point_th.find_parent('tr').find('td').get_text(strip=True)
+  try:
+    dew_point_th = table.find('th', string=lambda text: text and 'Dew Point:' in text)
+    dew_point = dew_point_th.find_parent('tr').find('td').get_text(strip=True)
+  except AttributeError:
+    dew_point = 'N/A'
 
   ## clean data
-  dew_point = re.sub(r"[^\d]", "", dew_point)
-  temperature = re.sub(r"[^\d]", "", temperature)
-  feels_like = re.sub(r"[^\d]", "", feels_like)
+  dew_point = re.sub(r"[^\d]", "", dew_point) if dew_point else "N/A"
+  temperature = re.sub(r"[^\d]", "", temperature) if temperature else "N/A"
+  feels_like = re.sub(r"[^\d]", "", feels_like) if feels_like else "N/A"
+  
+  # dew_point = re.sub(r"[^\d]", "", dew_point)
+  # temperature = re.sub(r"[^\d]", "", temperature)
+  # feels_like = re.sub(r"[^\d]", "", feels_like)
+
 
   data:dict = {
     "State": state,
